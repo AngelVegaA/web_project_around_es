@@ -9,3 +9,18 @@ const initialCards = [
 initialCards.forEach((card)=>{
     console.log(card.name);
 });
+
+const editProfileButton = document.querySelector('.profile__edit-button');
+const openModal = document.querySelector("#edit-popup");
+const closeModal = openModal.querySelector(".popup__close");
+
+editProfileButton.addEventListener('click', function () {
+    openModal.classList.add("popup_is-opened");
+});
+
+
+closeModal.addEventListener("click", function () {
+    openModal.classList.remove("popup_is-opened");
+});
+
+
