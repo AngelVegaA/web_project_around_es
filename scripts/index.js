@@ -11,16 +11,34 @@ initialCards.forEach((card)=>{
 });
 
 const editProfileButton = document.querySelector('.profile__edit-button');
-const openModal = document.querySelector("#edit-popup");
-const closeModal = openModal.querySelector(".popup__close");
+const profileModal = document.querySelector('#edit-popup');
+const closeProfileButton = profileModal.querySelector(".popup__close");
 
-editProfileButton.addEventListener('click', function () {
-    openModal.classList.add("popup_is-opened");
+const profileName = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
+const inputName = document.querySelector('.popup__input_type_name');
+const inputDescription = document.querySelector('.popup__input_type_description');
+
+function openModal(modal) {
+    modal.classList.add("popup_is-opened");
+}
+
+function closeModal(modal) {
+    modal.classList.remove("popup_is-opened");
+}
+
+function fillProfileForm() {
+    inputName.value = profileName.textContent;
+    inputDescription.value = profileDescription.textContent;
+}
+
+function handleOpenEditModal() {
+    fillProfileForm();         
+    openModal(profileModal);
+} // <--- ¡Esta es la llave que faltaba!
+
+editProfileButton.addEventListener('click', handleOpenEditModal);
+
+closeProfileButton.addEventListener('click', function () {
+    closeModal(profileModal);
 });
-
-
-closeModal.addEventListener("click", function () {
-    openModal.classList.remove("popup_is-opened");
-});
-
-
