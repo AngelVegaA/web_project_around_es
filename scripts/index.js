@@ -17,6 +17,12 @@ const inputName = document.querySelector('.popup__input_type_name');
 const inputDescription = document.querySelector('.popup__input_type_description');
 
 const cardTemplate = document.getElementById('card-template');
+const addCardButton = document.querySelector('.profile__add-button');
+const addCardModal = document.querySelector('#new-card-popup');
+const closeAddCardButton = addCardModal.querySelector(".popup__close");
+const addCardNameInput = addCardModal.querySelector('.popup__input_type_card-name');
+const addCardLinkInput = addCardModal.querySelector('.popup__input_type_url');
+const addCardForm = addCardModal.querySelector('.popup__form');
 
 function getCardElement(name = "Sin título", link = "./images/placeholder.jpg") {
     const cardElement = cardTemplate.content.cloneNode(true);
@@ -54,7 +60,7 @@ function fillProfileForm() {
 function handleOpenEditModal() {
     fillProfileForm();         
     openModal(profileModal);
-} // <--- ¡Esta es la llave que faltaba!
+} 
 
 editProfileButton.addEventListener('click', handleOpenEditModal);
 
@@ -65,14 +71,8 @@ closeProfileButton.addEventListener('click', function () {
 // Vamos a buscar el formulario en el DOM
 const formElement = profileModal.querySelector('.popup__form'); // Utiliza el método querySelector()
 
-// Lo siguiente es el controlador (handler) para el envío de formularios, aunque
-// no se enviará a ningún sitio todavía
-
-// Observa que el nombre de la función comienza con un verbo
-// y describe exactamente lo que hace la función
 function handleProfileFormSubmit(evt) {
-  // Esta línea impide que el navegador
-  // envíe el formulario en su forma predeterminada.
+
   evt.preventDefault();
   // Una vez hecho esto, podemos definir nuestra propia forma de enviar el formulario.
   // Lo explicaremos todo con más detalle después.
@@ -94,3 +94,36 @@ function handleProfileFormSubmit(evt) {
 // Conecta el controlador (handler) al formulario:
 // se observará el evento submit
 formElement.addEventListener('submit', handleProfileFormSubmit);
+
+function handleOpenAddCardModal() {        
+    openModal(addCardModal);
+} 
+
+function handleAddCardFormSubmit(evt) {
+    evt.preventDefault();
+    
+    const name = addCardNameInput.value;
+    const link = addCardLinkInput.value;
+    
+    // 1. En lugar de un objeto {}, creamos el elemento HTML clonando la plantilla
+    const newCardElement = getCardElement(name, link);
+    
+    const cardsContainer = document.querySelector('.cards__list');
+    
+    // 2. Insertamos el elemento HTML real al inicio
+    cardsContainer.prepend(newCardElement);
+    
+    // 3. Opcional pero súper recomendado: limpiar los inputs tras guardar
+    addCardNameInput.value = '';
+    addCardLinkInput.value = '';
+    
+    closeModal(addCardModal);
+}
+
+addCardButton.addEventListener('click', handleOpenAddCardModal);
+
+closeAddCardButton.addEventListener('click', function () {
+    closeModal(addCardModal);
+});
+
+addCardForm.addEventListener('submit', handleAddCardFormSubmit);
