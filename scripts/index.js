@@ -6,9 +6,6 @@ const initialCards = [
     {name: "Parque Nacional de la Vanoise", link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg"},
     {name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"}
 ];
-initialCards.forEach((card)=>{
-    console.log(card.name);
-});
 
 const editProfileButton = document.querySelector('.profile__edit-button');
 const profileModal = document.querySelector('#edit-popup');
@@ -18,6 +15,28 @@ const profileName = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputDescription = document.querySelector('.popup__input_type_description');
+
+const cardTemplate = document.getElementById('card-template');
+
+function getCardElement(name = "Sin título", link = "./images/placeholder.jpg") {
+    const cardElement = cardTemplate.content.cloneNode(true);
+    const cardImage = cardElement.querySelector('.card__image');
+    const cardTitle = cardElement.querySelector('.card__title');
+    cardTitle.textContent = name;
+    cardImage.src = link;
+    cardImage.alt = name;
+    return cardElement;
+}
+
+function renderCard(name, link) {
+    const cardElement = getCardElement(name, link);
+    const cardsContainer = document.querySelector('.cards__list');
+    cardsContainer.append(cardElement);
+}
+
+initialCards.forEach((card) => {
+    renderCard(card.name, card.link);
+});
 
 function openModal(modal) {
     modal.classList.add("popup_is-opened");
