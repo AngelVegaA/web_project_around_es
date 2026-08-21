@@ -46,6 +46,11 @@ const addCardNameInput = addCardModal.querySelector(
 const addCardLinkInput = addCardModal.querySelector(".popup__input_type_url");
 const addCardForm = addCardModal.querySelector(".popup__form");
 
+const imagePopupModal = document.querySelector("#image-popup");
+const closeImagePopupBtn = imagePopupModal.querySelector(".popup__close");
+const imagePopup = imagePopupModal.querySelector(".popup__image");
+const captionImgagePopup = imagePopupModal.querySelector(".popup__caption");
+
 function getCardElement(
   name = "Sin título",
   link = "./images/placeholder.jpg",
@@ -62,6 +67,9 @@ function getCardElement(
 
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
   cardDeleteButton.addEventListener("click", handleDeleteCard);
+
+  //Función para el Img Pupup
+  cardImage.addEventListener("click", handleImagePopup);
 
   return cardElement;
 }
@@ -159,6 +167,10 @@ closeAddCardButton.addEventListener("click", function () {
 
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
+closeImagePopupBtn.addEventListener("click", function () {
+  closeModal(imagePopupModal);
+});
+
 function handleLikeIcon(evt) {
   evt.target.classList.toggle("card__like-button_is-active");
 }
@@ -166,4 +178,16 @@ function handleLikeIcon(evt) {
 function handleDeleteCard(evt) {
   const cardItem = evt.target.closest(".card");
   cardItem.remove();
+}
+
+//función Handle para imgpopup
+function handleImagePopup(evt) {
+  const ClickledImage = evt.target;
+
+  imagePopup.src = ClickledImage.src;
+  imagePopup.alt = ClickledImage.alt;
+
+  captionImgagePopup.textContent = ClickledImage.alt;
+
+  openModal(imagePopupModal);
 }
