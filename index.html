@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -74,12 +74,18 @@
               name="name"
               placeholder="Nombre"
               type="text"
+              required
+              minlength="2"
+              maxlength="40"
             />
             <input
               class="popup__input popup__input_type_description"
               name="description"
               placeholder="Acerca de mí"
               type="text"
+              required
+              minlength="2"
+              maxlength="200"
             />
             <button class="button popup__button" type="submit">Guardar</button>
           </form>
@@ -124,6 +130,6 @@
         </div>
       </div>
     </div>
-    <script src="./scripts/index.js"></script> 
+    <script src="./scripts/index.js"></script>
   </body>
 </html>

@@ -157,3 +157,8 @@
     padding: 0;
   }
 }
+
+.popup__button:disabled {
+  background-color: white;
+  color: #cccccc;
+}

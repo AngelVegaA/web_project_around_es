@@ -51,9 +51,12 @@ const closeImagePopupBtn = imagePopupModal.querySelector(".popup__close");
 const imagePopup = imagePopupModal.querySelector(".popup__image");
 const captionImgagePopup = imagePopupModal.querySelector(".popup__caption");
 
+const editProfileSubmitButton = profileModal.querySelector(".popup__button");
+const addCardSubmitButton = addCardModal.querySelector(".popup__button");
+
 function getCardElement(
-  name = "Sin título",
-  link = "./images/placeholder.jpg",
+  name = "",
+  link = "",
 ) {
   const cardElement = cardTemplate.content.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
@@ -94,10 +97,10 @@ function closeModal(modal) {
 
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
-    closeModal(profileModal);
-    closeModal(addCardModal);
-    closeModal(imagePopupModal);
-  }
+    const openedPopup = document.querySelector(".popup_is-opened");
+    if (openedPopup) {
+      closeModal(openedPopup);
+    }
 });
 
 function fillProfileForm() {
@@ -107,6 +110,7 @@ function fillProfileForm() {
 
 function handleOpenEditModal() {
   fillProfileForm();
+  toggleButtonState(formElement, editProfileSubmitButton);
   openModal(profileModal);
 }
 
@@ -143,6 +147,8 @@ function handleProfileFormSubmit(evt) {
 formElement.addEventListener("submit", handleProfileFormSubmit);
 
 function handleOpenAddCardModal() {
+  addCardForm.reset();
+  toggleButtonState(addCardForm, addCardSubmitButton);
   openModal(addCardModal);
 }
 
@@ -209,3 +215,15 @@ function handleOverlayClick(evt) {
 profileModal.addEventListener("click", handleOverlayClick);
 addCardModal.addEventListener("click", handleOverlayClick);
 imagePopupModal.addEventListener("click", handleOverlayClick);
+
+function toggleButtonState(form, button) {
+  button.disabled = !form.checkValidity();
+}
+
+formElement.addEventListener("input", () => {
+  toggleButtonState(formElement, editProfileSubmitButton);
+});
+
+addCardForm.addEventListener("input", () => {
+  toggleButtonState(addCardForm, addCardSubmitButton);
+});
