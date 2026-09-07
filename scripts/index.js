@@ -92,6 +92,14 @@ function closeModal(modal) {
   modal.classList.remove("popup_is-opened");
 }
 
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeModal(profileModal);
+    closeModal(addCardModal);
+    closeModal(imagePopupModal);
+  }
+});
+
 function fillProfileForm() {
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
@@ -191,3 +199,13 @@ function handleImagePopup(evt) {
 
   openModal(imagePopupModal);
 }
+
+function handleOverlayClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closeModal(evt.currentTarget);
+  }
+}
+
+profileModal.addEventListener("click", handleOverlayClick);
+addCardModal.addEventListener("click", handleOverlayClick);
+imagePopupModal.addEventListener("click", handleOverlayClick);
