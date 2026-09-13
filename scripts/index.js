@@ -49,7 +49,7 @@ const addCardForm = addCardModal.querySelector(".popup__form");
 const imagePopupModal = document.querySelector("#image-popup");
 const closeImagePopupBtn = imagePopupModal.querySelector(".popup__close");
 const imagePopup = imagePopupModal.querySelector(".popup__image");
-const captionImgagePopup = imagePopupModal.querySelector(".popup__caption");
+const captionImagePopup = imagePopupModal.querySelector(".popup__caption");
 
 const editProfileSubmitButton = profileModal.querySelector(".popup__button");
 const addCardSubmitButton = addCardModal.querySelector(".popup__button");
@@ -197,12 +197,12 @@ function handleDeleteCard(evt) {
 
 //función Handle para imgpopup
 function handleImagePopup(evt) {
-  const ClickledImage = evt.target;
+  const ClickedImage = evt.target;
 
-  imagePopup.src = ClickledImage.src;
-  imagePopup.alt = ClickledImage.alt;
+  imagePopup.src = ClickedImage.src;
+  imagePopup.alt = ClickedImage.alt;
 
-  captionImgagePopup.textContent = ClickledImage.alt;
+  captionImagePopup.textContent = ClickedImage.alt;
 
   openModal(imagePopupModal);
 }
