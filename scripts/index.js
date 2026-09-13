@@ -101,6 +101,7 @@ document.addEventListener("keydown", function (event) {
     if (openedPopup) {
       closeModal(openedPopup);
     }
+}
 });
 
 function fillProfileForm() {
